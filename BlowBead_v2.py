@@ -7,6 +7,7 @@ import time
 import winsound
 from datetime import datetime
 import csv
+from  openpyxl import Workbook, load_workbook
 
 ###############Writetocsv########################
 
@@ -96,6 +97,7 @@ def AddTransaction():
     if v_rbutton.get()==1:
         writetocsv(A,'transaction.csv')
 
+#####History window####################
 
 def HistoryWindow(event):
     HIS =Toplevel() # คำสั่งคล้ายๆกับ GUI =Tk()
@@ -123,6 +125,24 @@ def HistoryWindow(event):
 
     HIS.mainloop()
 GUI.bind('<F1>', HistoryWindow)
+
+
+##########Export database ##############################################
+menubar = Menu(GUI)
+GUI.config( menu = menubar)
+
+filemenu = Menu(menubar, tearoff=0)
+menubar.add_cascade(label ='File', menu = filemenu)
+
+#เพิ่มมนูย่อย
+def ExportDatabase():
+    print('Export Database to CSV')
+filemenu.add_command(label = 'Export', command=ExportDatabase)
+filemenu.add_command(label = 'Exit', command=GUI.quit)
+
+#####################################################################
+
+
 
 def StartVideo():
     global cap1,cap2
